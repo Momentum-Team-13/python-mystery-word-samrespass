@@ -62,7 +62,7 @@ def board_maker(guess_me):
 
 def play_game(scoreboard, breaker):
     if len(WRONG) == 8:
-        print(f"LOSER!\nThe Word Was: {''.join(breaker)}")
+        print(f"\nLOSER!\nThe Word Was: {''.join(breaker)}\n")
         mulligan = inquirer.prompt(play_again)
         if 'Nah...' in mulligan.values():
             sys.exit(0)
@@ -72,7 +72,7 @@ def play_game(scoreboard, breaker):
             past_guesses.clear()
             choose_difficulty()
     if scoreboard == breaker:
-        print(f"{''.join(breaker)}\nYOU WIN!")
+        print(f"'\n',{''.join(breaker)}\nYOU WIN!")
         mulligan = inquirer.prompt(play_again)
         if 'Nah...' in mulligan.values():
             sys.exit(0)
@@ -102,10 +102,9 @@ def play_game(scoreboard, breaker):
                     scoreboard[correct] = breaker[correct]
             play_game(scoreboard, breaker)
         elif guess not in breaker:
-            print("dumbass")
             past_guesses.append(guess)
             WRONG.append("X")
-            print(" X" * len(WRONG),"\n",f'{8 - len(WRONG)} {"guess" if 8 - len(WRONG) == 1 else "guesses"} left!')
+            print("\nwrong, dumbass\n","X" * len(WRONG),"\n",f'{8 - len(WRONG)} {"guess" if 8 - len(WRONG) == 1 else "guesses"} left!')
             if "hell" in hell and len(WRONG) != 8:
                 past_guesses.clear()
                 hell_game()
@@ -116,7 +115,7 @@ def hell_game():
     breaker = list(guess_me)
     new_board = "_" * len(breaker)
     scoreboard = list(new_board)
-    print("The Hell Continues")
+    print("\nThe Hell Continues")
     return play_game(scoreboard, breaker)
 
 
