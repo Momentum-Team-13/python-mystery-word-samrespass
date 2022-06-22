@@ -1,6 +1,4 @@
 import random
-import operator
-import os
 import sys
 
 words = open("words.txt", "r")
@@ -23,24 +21,26 @@ def play_game():
         sys.exit(0)
     else:
         print(f"{str.join(scoreboard)} \n GUESS ME!")
-        guess = input("Pick A Letter: ")
+        guess = input("Pick A Letter: ").lower()
         if not guess.isalpha():
             print("Letters only!")
             play_game()
-        elif guess[0] in past_guesses:
+        elif len(guess) > 1:
+            print("One at a time buddy.")
+            play_game()
+        elif guess in past_guesses:
             print("You Already Tried That...")
             play_game()
-        elif guess[0] in breaker:
+        elif guess in breaker:
             print("good guess!")
-            past_guesses.append(guess[0])
-            guess_list = guess[0]
+            past_guesses.append(guess)
             for correct in range(len(breaker)):
-                if breaker[correct] == guess_list:
+                if breaker[correct] == guess:
                     scoreboard[correct] = breaker[correct]
             play_game()
-        elif guess[0] not in breaker:
+        elif guess not in breaker:
             print("dumbass")
-            past_guesses.append(guess[0])
+            past_guesses.append(guess)
             WRONG.append("X")
             print(" X" * len(WRONG),"\n",f'{8 - len(WRONG)} {"guess" if 8 - len(WRONG) == 1 else "guesses"} left!')
             play_game()
