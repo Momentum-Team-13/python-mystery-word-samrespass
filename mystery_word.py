@@ -16,7 +16,6 @@ past_guesses = []
 
 def play_game():
     print(f"{str.join(scoreboard)} \n GUESS ME!")
-    print(guess_me)
     if len(WRONG) == 8:
         print(f"LOSER!\nThe Word Was: {guess_me}")
         sys.exit(0)
@@ -30,11 +29,10 @@ def play_game():
     elif guess[0] in breaker:
         print("good guess!")
         past_guesses.append(guess[0])
-        guess_list = list(guess[0])
-        for correct_guess in range(len(breaker)):
-            print(correct_guess)
-            # correct = breaker.index(guess[0])
-            # scoreboard[correct] = breaker[correct]
+        guess_list = guess[0]
+        for correct in range(len(breaker)):
+            if breaker[correct] == guess_list:
+                scoreboard[correct] = breaker[correct]
         play_game()
     elif guess[0] not in breaker:
         print("dumbass")
